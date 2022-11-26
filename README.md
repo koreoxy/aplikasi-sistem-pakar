@@ -1,4 +1,4 @@
-# Aplikai Diagnosa Penyakit Kulit
+# Aplikasi Diagnosa Penyakit Kulit
 
 
 ## Screenshot
