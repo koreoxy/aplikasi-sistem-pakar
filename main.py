@@ -1,9 +1,13 @@
 import PySimpleGUI as sg
 
-sg.theme('default1')
-# sg.theme('DarkGreen6')
+#sg.theme('default1')
+sg.theme('DarkGreen6')
 # sg.theme('LightBrown3')
 # sg.theme('Tan')
+
+# VARIABLE
+title_table_pasien = ['Nama', 'Tanggal Lahir', 'Alamat Rumah', 'Nomor Telepon', 'Hasil Diagnosa']
+data_pasien = [['Budi', '1-10-1999', 'Meulaboh', '08526071882', 'Penyakit Eksim']]
 
 
 title_penyakit_kulit = ['Kode', 'Nama Penyakit Kulit']
@@ -16,7 +20,7 @@ data_penyakit_kulit = [
     ['P06', 'Kurap'],
     ['P07', 'Panu'],
     ['P08', 'Lichen Planus'],
-    ['P09', 'Hive'],
+    ['P09', 'Hives'],
 ]
 title_gejala = ['Kode Gejala', 'Nama Gejala']
 data_gejala = [
@@ -213,11 +217,37 @@ diagnosa_layout = [
     [sg.Text('Hasil Diagnosa', background_color = 'Grey', text_color = 'White', border_width = 5)],
     [sg.Multiline('', key='-OUTPUT-', no_scrollbar=True, size = (800, 0), disabled = True)],
     [sg.Text('Solusi', background_color = 'Grey', text_color = 'White', border_width = 5)],
-    [sg.Multiline('', key='-SOLUSI-', no_scrollbar=True, size = (800, 20), disabled = True)]
+    [sg.Multiline('', key='-SOLUSI-', size = (800, 20), disabled = True)]
 ]
 
+
+form_layout = [
+    [sg.Text('Formulir Pengisian Identitas Pasien', background_color = 'Grey', text_color = 'White', border_width = 5)],
+    [sg.Text('Nama Pasien: ', size = (20,1)), sg.Input(key='-NAMA-', do_not_clear=True, size=(20, 1), expand_x =True,)],
+    [sg.Text('Tanggal Lahir: ', size = (20,1)), sg.Input(key='-TGL-', do_not_clear=True, size=(20, 1), expand_x =True,)],
+    [sg.Text('Alamat Rumah: ', size = (20,1)), sg.Input(key='-ALAMAT-', do_not_clear=True, size=(20, 1), expand_x =True,)],
+    [sg.Text('Nomor Telepon: ', size = (20,1)), sg.Input(key='-NOMOR_TELEPON-', do_not_clear=True, size=(20, 1), expand_x =True,)],
+    [sg.Text('Hasil Diagnosa Penyakit: ', size = (20,1)), sg.Input(key='-DIAGNOSA_PENYAKIT-', do_not_clear=True, size=(20, 1), expand_x =True,)],
+    [sg.Button('Submit'), sg.Button('Clear', key='-RESET_DATA_PASIEN-')],
+    [sg.Text('')],
+    [sg.Text('Data Pasien', background_color = 'Grey', text_color = 'White', border_width = 5)],
+    [sg.Table(
+        values=data_pasien, 
+        headings=title_table_pasien,
+        auto_size_columns = True,
+        display_row_numbers= True,
+        justification = 'left',
+        key = '-TABLE_PASIEN-',
+        max_col_width=0,
+        row_height = 40,
+        expand_x =True,   
+    )]
+
+]
+
+
 artikel_layout = [
-    [sg.Text('Table Penyakit Kulit')],
+    [sg.Text('Table Penyakit Kulit', background_color = 'Grey', text_color = 'White', border_width = 5)],
     [sg.Table(
         values=data_penyakit_kulit, 
         headings=title_penyakit_kulit,
@@ -227,7 +257,7 @@ artikel_layout = [
         max_col_width=50,
         expand_x =True,
     )],
-    [sg.Text('Table Gejala')],
+    [sg.Text('Table Gejala', background_color = 'Grey', text_color = 'White', border_width = 5)],
     [sg.Table(
         values=data_gejala, 
         headings=title_gejala,
@@ -238,7 +268,7 @@ artikel_layout = [
         expand_x =True,
         vertical_scroll_only = True,
     )],
-    [sg.Text('Table Aturan')],
+    [sg.Text('Table Aturan', background_color = 'Grey', text_color = 'White', border_width = 5)],
     [sg.Table(
         values=data_aturan, 
         headings=title_aturan,
@@ -254,7 +284,6 @@ artikel_layout = [
 layout_p1 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_eksim), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -264,7 +293,6 @@ layout_p1 = [
 layout_p2 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_dermatitis), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -274,7 +302,6 @@ layout_p2 = [
 layout_p3 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_impetigo), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -283,7 +310,6 @@ layout_p3 = [
 layout_p4 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_jerawat), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -293,7 +319,6 @@ layout_p4 = [
 layout_p5 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_kudis), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -302,7 +327,6 @@ layout_p5 = [
 layout_p6 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_kurap), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -311,7 +335,6 @@ layout_p6 = [
 layout_p7 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_panu), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -320,7 +343,6 @@ layout_p7 = [
 layout_p8 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_lichen_planus), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -329,7 +351,6 @@ layout_p8 = [
 layout_p9 = [
     [sg.Multiline(
         '\n'.join(info_penyakit_hives), 
-        no_scrollbar=True, 
         size = (800, 50),
         disabled = True,
     )]
@@ -395,15 +416,16 @@ layout = [
     [sg.TabGroup(
         [[
             sg.Tab('Diagnosa', diagnosa_layout),
+            sg.Tab('Formulir Pasien', form_layout),
             sg.Tab('Artikel', artikel_layout),
             sg.Tab('Info Penyakit', info_penyakit),
             sg.Tab('About', about_layout),
         ]],
         tab_location = 'centertop',
         title_color = 'White', 
-        tab_background_color = 'Purple', 
-        selected_title_color = 'Green',
-        selected_background_color = 'Yellow',
+        tab_background_color = 'Green', 
+        selected_title_color = 'White',
+        selected_background_color = 'Gray',
         size=(800, 0)
         
     ), 
@@ -426,29 +448,43 @@ layout = [
 ]
 
 
-window = sg.Window('Sistem Pakar', layout, size=(1024,768))
+window = sg.Window('Sistem Pakar Diagnosa Penyakit Kulit', layout, icon=r'C:\Users\Ace\Desktop\aplikasi-sistem-pakar-main\icon.ico', size=(1024,768))
 
 add_gejala = []
 diagnosa = []
 
 while True:
     event, values = window.read()
-    print('Output Terminal :')
-    print('Event:',event)
-    print('-- Values Output --')
+    # print('Output Terminal :')
+    # print('Event:',event)
+    # print('-- Values Output --')
     if event == sg.WIN_CLOSED:
         break
+
 
     if event == 'Tambahkan':
         add_gejala = values[0]
         window['-TEXTADD-'].update('\n'.join(add_gejala))
         print("[LOG] Clicked Tambahkan!")
 
+    if event == 'Submit':
+        data_pasien.append([values['-NAMA-'], values['-TGL-'], values['-ALAMAT-'], values['-NOMOR_TELEPON-'], values['-DIAGNOSA_PENYAKIT-']])
+        window['-TABLE_PASIEN-'].update(values=data_pasien)
+        
+    if event == '-RESET_DATA_PASIEN-':
+        window['-NAMA-'].update('')
+        window['-TGL-'].update('')
+        window['-ALAMAT-'].update('')
+        window['-NOMOR_TELEPON-'].update('')
+        window['-DIAGNOSA_PENYAKIT-'].update('')
+
+
     if event == 'Reset':
         window['-TEXTADD-'].update('')
         window['-SOLUSI-'].update('')
         window['-OUTPUT-'].update('')
         print("[LOG] Clicked Reset!")
+    
 
     if event == 'Diagnosa':
         print("[LOG] Clicked Diagnosa!")
